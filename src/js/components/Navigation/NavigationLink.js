@@ -7,7 +7,6 @@ export default class NavigationLink extends React.Component{
         this.state={
            active:false
         };
-            console.log("we hit one")
     }
     renderActiveClass(){
         var pagePath = this.props.pagePath;
