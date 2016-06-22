@@ -8,6 +8,7 @@ import Layout from "./pages/Layout";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
+import Todo from "./pages/Todo";
 
 require('../css/scss/index.scss')
 
@@ -18,6 +19,7 @@ ReactDOM.render(
           <Route path="about" component={About}> </Route>
           <Route path="services" component={Services} ></Route>
           <Route path="contact" component={Contact}></Route>
+          <Route path="todo" component={Todo}></Route>
       </Route>
     </Router>,    
     document.getElementById("app")
