@@ -23,7 +23,7 @@ export default class Navigation extends React.Component{
         var location  = this.props.location;
         var urlPath = location.pathname;
         
-        var links = ["todo","about", "services", "contact"].map((link, i) => <NavigationLink linkPath={link} key={i} pagePath={urlPath} toggleCollapse={this.toggleCollapse.bind(this)} />  );
+        var links = ["todo","about", "services","crimes", "contact"].map((link, i) => <NavigationLink linkPath={link} key={i} pagePath={urlPath} toggleCollapse={this.toggleCollapse.bind(this)} />  );
 
         return (
          

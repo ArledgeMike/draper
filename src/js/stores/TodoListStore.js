@@ -36,6 +36,21 @@ class TodoListStore extends EventEmitter{
         });
         this.emit("change");
     }
+    deleteTodo(id){
+        var findID = id;
+        this.todos.forEach((todo, index) => {
+            console.log(todo.id);
+            console.log(findID)
+            if(todo.id == findID){
+               console.log("found it")
+                this.todos.splice(index,1);
+            }
+        })
+           this.emit("change");
+    }
+    reloadTodos(){
+        console.log("we want to reload the todos")
+    }
     getAll(){
         return this.todos;
     }
@@ -45,6 +60,12 @@ class TodoListStore extends EventEmitter{
             case "CREATE_TODO":{
                 this.createTodo(action.text)
             }
+            case "DELETE_TODO":{
+                this.deleteTodo(action.id)
+            }
+            case "RELOAD TODOS":{
+                this.reloadTodos();
+            }
         }
     }
 
@@ -52,5 +73,5 @@ class TodoListStore extends EventEmitter{
 
 var todoStore = new TodoListStore;
 dispatcher.register(todoStore.handleAction.bind(todoStore));
-window.dispatcher = dispatcher;
+
 export default todoStore;

@@ -8,7 +8,7 @@ import * as TodoListActions from "../actions/TodoListActions";
 export default class TodoList extends React.Component{
     constructor(){
         super();
-      console.log(this);
+
       this.state={
           todos : TodoListStore.getAll(),
           inputValue :""
@@ -26,6 +26,10 @@ export default class TodoList extends React.Component{
     createTodo(){
         TodoListActions.createTodo(this.state.inputValue);
     }
+    deleteTodo(id){
+        console.log(id);
+        TodoListActions.deleteTodo(id)
+    }
     handleChange(e){
         this.setState({inputValue: e.target.value})
     }
@@ -34,8 +38,10 @@ export default class TodoList extends React.Component{
     }
     render(){
           console.log(this.state);
+          var t = this;
         var todoList = this.state.todos.map((todo, i) =>{  
-            return <TodoItem key={todo.id} text={todo.text} status={todo.complete} />
+            console.log(this.deleteTodo)
+            return <TodoItem key={todo.id} todoID={todo.id} text={todo.text} status={todo.complete} deleteTodo={t.deleteTodo.bind(this)} />
 
         } );
         return (

@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import Todo from "./pages/Todo";
+import Crimes from "./pages/Crimes";
 
 require('../css/scss/index.scss')
 
@@ -19,6 +20,7 @@ ReactDOM.render(
           <Route path="about" component={About}> </Route>
           <Route path="services" component={Services} ></Route>
           <Route path="contact" component={Contact}></Route>
+          <Route path="crimes" component={Crimes}></Route>
           <Route path="todo" component={Todo}></Route>
       </Route>
     </Router>,    
