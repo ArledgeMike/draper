@@ -1,29 +1,49 @@
 import {EventEmitter} from "events";
 
 import dispatcher from "../dispatcher";
-class CrimeTableStore extends EventEmitter{
-constructor(){
-    super();
-}
-getInitialData(){
-    var initData;
-    $.getJSON("https://data.cityofchicago.org/resource/tt4n-kn4t.json",(data)=>{
-        console.log("the data from api",data)
-        initData = data
-    })
-    dispatcher.dispatch({
-        type: "Get_INITIAL_DATA",
-        data:initData
 
-    })
-}
-handleAction(action){
-    switch(action.type){
-        case "GET_INITIAL_DATA":{
-            this.getInitialData();
+class CrimeTableStore extends EventEmitter{
+    constructor(){
+        super();
+
+        this.crimes = [];
+
+    }
+    getAllCrimes(){
+        return this.crimes;
+    }
+    pageUp(page){
+
+    }
+    
+    pageDown(page){
+
+    }
+    
+    getCrimes(crimes){
+        
+            this.crimes = crimes;
+            this.emit("change");
+       
+    }
+    fetchingCrimes(){
+            console.log("fetching stuff")
+    }
+
+    //THIS IS FOR WHEN EVENTS COME IN TO THE STORE SO WE CAN CHANGE THE STORE DATA 
+    handleAction(action){
+        switch(action.type){
+            case "GET_INITIAL_DATA":{
+                this.getInitialData();
+            };
+            case "GET_CRIMES":{
+                this.getCrimes(action.crimes);
+            }
+            case "FETCHING_DATA":{
+                this.fetchingCrimes();
+            }
         }
     }
-}
 
 }
 

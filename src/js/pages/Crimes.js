@@ -13,6 +13,7 @@ export default class Crimes extends React.Component{
         return (
             <div class="container">
            <h1> crimes page</h1>
+           <CrimeTable />
             </div>
          )
        
