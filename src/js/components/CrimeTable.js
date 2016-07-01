@@ -8,6 +8,7 @@ export default class CrimeTable extends React.Component{
 
     constructor(){
         super();
+        this.setCrimeState = this.setCrimeState.bind(this);
         this.props ={
             pagination:35
         }
@@ -19,41 +20,44 @@ export default class CrimeTable extends React.Component{
     }
 
     componentDidMount(){
-        console.log("component did mount!!!")
    
+          //  console.log("did mount call")
+          // CrimeTableActions.getData();
+  
     }
     componentWillMount(){
-        var t = this;
-        CrimeTableStore.on("change", function(){
-            console.log("heard a store change")
-                t
-                .setState({
-                    crimes:CrimeTableStore.getAllCrimes()
-                });
-                console.log(t)
-        });
+     
+     
+        CrimeTableStore.on("change", this.setCrimeState);
     }
     componentWillUnmount(){
-      //  CrimeTableStore.removeListener("change");
+             CrimeTableStore.removeListener("change", this.setCrimeState);
+    }
+    setCrimeState(){
+        this.setState({
+            crimes:CrimeTableStore.getAllCrimes(),
+            loading:CrimeTableStore.getLoadingStatus()
+        });
     }
     getCrimes(){
 
 
-        console.log("get crimes")
+  
 
   CrimeTableActions.getData();
    
     }
     render(){
-  console.log(this.props.pagination);
+var icon = this.state.loading ? "\u2714" : "\u2716";
+
         var crimeItems = this.state.crimes.map((crime, i) =>{
         return    <CrimeItem key={i} name={crime.name} department={crime.department} employee_annual_salary={crime.employee_annual_salary} job_titles={crime.job_titles} />
        });
-        console.log(crimeItems)
+   
 
         return(
             
-            <div>Crimes
+            <div>Crimes<p>Loading{icon}</p>
             <button class="btn btn-success" onClick={this.getCrimes.bind(this)}>Load Jobs</button>
             <table class="table">
             <thead>

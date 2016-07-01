@@ -7,6 +7,7 @@ class CrimeTableStore extends EventEmitter{
         super();
 
         this.crimes = [];
+        this.loading = false;
 
     }
     getAllCrimes(){
@@ -26,8 +27,13 @@ class CrimeTableStore extends EventEmitter{
             this.emit("change");
        
     }
-    fetchingCrimes(){
-            console.log("fetching stuff")
+    fetchingCrimes(loading_status){
+
+         this.loading = loading_status;
+         this.emit("change");
+    }
+    getLoadingStatus(){
+        return this.loading;
     }
 
     //THIS IS FOR WHEN EVENTS COME IN TO THE STORE SO WE CAN CHANGE THE STORE DATA 
@@ -40,7 +46,7 @@ class CrimeTableStore extends EventEmitter{
                 this.getCrimes(action.crimes);
             }
             case "FETCHING_DATA":{
-                this.fetchingCrimes();
+                this.fetchingCrimes(action.loading);
             }
         }
     }

@@ -13,14 +13,16 @@ export function getData(){
     })
  */
  dispatcher.dispatch({
-        type:"FETCHING_DATA"
+        type:"FETCHING_DATA",
+        loading:true
     });
     $.getJSON("https://data.cityofchicago.org/resource/tt4n-kn4t.json").then((data)=>{
         var crimeData = data;
         console.log("getting data through actions")
         dispatcher.dispatch({
             type: "GET_CRIMES",
-            crimes: crimeData
+            crimes: crimeData,
+            loading:false
     });
 
 

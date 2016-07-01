@@ -12,7 +12,6 @@ export default class NavigationLink extends React.Component{
         var pagePath = this.props.pagePath;
         var pageUrl = "/" + this.props.linkPath;
 
-       console.log(pagePath, pageUrl)
         if(pagePath == pageUrl){
             return "active"
         }

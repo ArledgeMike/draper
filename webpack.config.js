@@ -2,6 +2,8 @@ var webpack = require('webpack');
 var path = require('path');
 var node_dir = __dirname + '/node_modules';
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports ={
     devtool: 'inline-source-map',
     entry:[
@@ -15,7 +17,10 @@ module.exports ={
         filename: 'bundle.js'
     },
     plugins:[
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin('style.css',{
+            allChunks:true
+        })
        
     ],
     module:{
@@ -30,7 +35,8 @@ module.exports ={
                         }
                     },{
                         test: /\.scss$/,
-                        loaders: ['style', 'css', 'sass']
+                        loader: ExtractTextPlugin.extract('css!sass')
+                        //loaders: ['style', 'css', 'sass']
                     }
                     
                 ]

@@ -63,7 +63,7 @@ class TodoListStore extends EventEmitter{
             case "DELETE_TODO":{
                 this.deleteTodo(action.id)
             }
-            case "RELOAD TODOS":{
+            case "RELOAD_TODOS":{
                 this.reloadTodos();
             }
         }
